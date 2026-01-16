@@ -18,7 +18,7 @@
 #   仅打包 ZIP: ./build.sh --zip
 #   明确指定 ARM64: ./build.sh --arm64
 #   明确指定 Intel x64: ./build.sh --x64
-#   同时构建 ARM64 + x64: ./build.sh --all（默认）
+#   构建当前架构: ./build.sh --all（默认，不强制指定架构）
 #
 # 输出位置：
 #   打包完成后，文件会在 dist/ 目录中
@@ -93,7 +93,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     --all)
-      # 同时构建 ARM64 + x64（使用 electron-builder 默认配置）
+      # 构建当前架构（不强制指定）
       ARCH=""
       shift
       ;;

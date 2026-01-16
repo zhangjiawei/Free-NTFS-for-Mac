@@ -19,7 +19,7 @@
 ./ninja/build.sh --zip        # 仅打包 ZIP
 ./ninja/build.sh --arm64      # 明确指定 ARM64
 ./ninja/build.sh --x64        # 明确指定 Intel x64
-./ninja/build.sh --all        # 同时构建 ARM64 + x64（默认）
+./ninja/build.sh --all        # 构建当前架构（默认）
 
 # 或使用 npm 脚本
 pnpm run build
@@ -317,7 +317,7 @@ pnpm run sync-version
 ### 构建应用
 
 ```bash
-# 基本构建
+# 基本构建（当前架构）
 pnpm run build
 
 # 清理后构建
@@ -325,6 +325,10 @@ pnpm run build:clean
 
 # 仅构建 DMG
 pnpm run build:dmg
+
+# 指定架构构建（推荐在对应架构机器/CI 上执行）
+pnpm run build:arm64
+pnpm run build:x64
 ```
 
 ### 使用 NTFS 读写功能
