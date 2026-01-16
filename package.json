@@ -47,6 +47,7 @@
   "build": {
     "appId": "io.hoochanlon.github",
     "productName": "Nigate",
+    "publish": "never",
     "icon": "src/imgs/ico/flash.icns",
     "npmRebuild": false,
     "electronDownload": {
