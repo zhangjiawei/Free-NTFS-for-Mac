@@ -154,26 +154,28 @@ export ELECTRON_BUILDER_CACHE="${HOME}/.cache/electron-builder"
 # ============================================================
 # -n "$TARGET": 检查变量是否非空（用户指定了格式）
 # -n "$ARCH": 检查变量是否非空（用户指定了架构）
+# --publish=never: 禁止 electron-builder 在 tag 构建时尝试发布
+PUBLISH_FLAG="--publish=never"
 
 if [ -n "$TARGET" ] && [ -n "$ARCH" ]; then
   # 用户同时指定了格式和架构
   # 例如: ./build.sh --dmg --arm64
-  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder --mac $TARGET $ARCH
+  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder --mac $TARGET $ARCH $PUBLISH_FLAG
 
 elif [ -n "$TARGET" ]; then
   # 用户只指定了格式
   # 例如: ./build.sh --dmg
-  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder --mac $TARGET
+  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder --mac $TARGET $PUBLISH_FLAG
 
 elif [ -n "$ARCH" ]; then
   # 用户只指定了架构
   # 例如: ./build.sh --arm64
-  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder --mac $ARCH
+  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder --mac $ARCH $PUBLISH_FLAG
 
 else
   # 用户没有指定任何特殊参数，使用默认配置
   # 默认配置在 package.json 的 "build" 字段中定义
-  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder
+  ELECTRON_MIRROR="${ELECTRON_MIRROR:-}" pnpm exec electron-builder $PUBLISH_FLAG
 fi
 
 # ============================================================
